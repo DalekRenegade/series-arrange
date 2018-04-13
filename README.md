@@ -1,2 +1,2 @@
 # series-arrange
-Series Arrnage
+Series Arrange
