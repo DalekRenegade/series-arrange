@@ -27,7 +27,6 @@ class DownloadedFileDetail:
             elif self.downloadedFileName[i].upper() == 'E' and '0' <= self.downloadedFileName[i + 1] <= '9' and '0' <= \
                     self.downloadedFileName[i + 2] <= '9':
                 self.episodeNos.append(int(self.downloadedFileName[i + 1:i + 3]))
-                self.episodeNos.append(int(self.downloadedFileName[i + 1:i + 3]))
                 i += 3
             else:
                 i += 1
@@ -70,7 +69,11 @@ class DownloadedFileDetail:
         destDir = os.path.join(self.destinationSeriesPath, 'Season ' + str(self.seasonNo))
         if not os.path.exists(destDir):
             os.makedirs(destDir)
-        dest = os.path.join(destDir, self.downloadedFileName)
+        pattern, epString = '{}E{:0>2d}', ''
+        for ep in self.episodeNos:
+            epString = pattern.format(epString, ep)
+        destFileName = '{}.S{:0>2d}{}{}'.format(self.tokenizedFileName, self.seasonNo, epString, os.path.splitext(self.downloadedFileName)[1])
+        dest = os.path.join(destDir, destFileName)
         if os.path.exists(dest):
             os.remove(dest)
         if move:

@@ -1,4 +1,5 @@
 import os
+import sys
 from string import ascii_uppercase
 from DownloadedFileDetail import DownloadedFileDetail
 
@@ -38,8 +39,10 @@ if __name__ == "__main__":
     userProfile = ''
     if os.name == 'nt':
         userProfile = os.environ['USERPROFILE']
-    elif os.name == '':
+    elif os.name == 'posix':
         userProfile = os.environ['HOME']
+    else:
+        sys.exit(0)
     downloadsPath = os.path.join(userProfile, 'Downloads')
     move, seriesHddPath = identifySeriesHddPath(userProfile)
     baseSeriesList = os.listdir(seriesHddPath)
