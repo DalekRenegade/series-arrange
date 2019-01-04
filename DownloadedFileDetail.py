@@ -32,7 +32,7 @@ class DownloadedFileDetail:
                 i += 1
 
         if seasonIndex > 0:
-            self.tokenizedFileName = self.downloadedFileName[:seasonIndex - 1].replace('.', ' ').replace('_', ' ').replace('-', ' ').strip()
+            self.tokenizedFileName = self.downloadedFileName[:seasonIndex - 1].replace('.', ' ').replace('_', ' ').replace('+', ' ').replace('-', ' ').strip()
         return seasonIndex > 0
 
     def identifySeries(self, seriesHddPath, baseSeriesList):
